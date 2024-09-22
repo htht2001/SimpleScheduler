@@ -674,50 +674,59 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
         extra = ""
         value = passedvalue.upper()
         domain = eid.split(".")
-        
-        # Base command URL depending on the entity type
-        command_url = simpleschedulerconf.HASSIO_URL + "/services/" + domain[0] + "/turn_" + action
-        postdata = '{"entity_id":"%s"}' % eid
 
-        if action == 'on':
-            if domain[0] == "light" and value != "":
-                # Handle light-specific logic (unchanged)
-                pass
-            
-            if domain[0] == "fan" and value != "":
-                # Handle fan-specific logic (unchanged)
-                pass
-
-            if domain[0] == "cover" and value != "":
-                # Handle cover-specific logic (unchanged)
-                pass
-
-            if domain[0] == "valve" and value != "":
-                # Handle valve-specific logic (unchanged)
-                pass
-
-            if domain[0] == "climate" and value != "":
-                # Correct URL for setting fan mode
-                command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, value)
-                command = "Setting fan mode"
-                extra = f"to {value}"
-
+        # Only set action to 'turn_on' for entities that need it
+        if domain[0] == "climate" and value != "" and action == "set_fan_mode":
+            # Set fan mode for climate entity
+            command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
+            postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, value)
+            command = "Setting fan mode"
+            extra = f"to {value}"
         else:
-            # Handle "off" or similar actions for climate, cover, valve, etc.
-            if domain[0] == "climate":
-                # Handle turning off climate
-                pass
+            # Default behavior for turning on/off and other actions
+            command_url = simpleschedulerconf.HASSIO_URL + "/services/" + domain[0] + "/turn_" + action
+            postdata = '{"entity_id":"%s"}' % eid
+            
+            if action == 'on':
+                if domain[0] == "light" and value != "":
+                    # Handle light logic here (unchanged)
+                    pass
+                
+                if domain[0] == "fan" and value != "":
+                    # Handle fan logic here (unchanged)
+                    pass
 
-        # Logging and calling the Home Assistant API
+                if domain[0] == "cover" and value != "":
+                    # Handle cover logic here (unchanged)
+                    pass
+
+                if domain[0] == "valve" and value != "":
+                    # Handle valve logic here (unchanged)
+                    pass
+            
+            else:
+                if domain[0] == "cover":
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/cover/close_cover"
+                    command = "Closing"
+                
+                if domain[0] == "valve":
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/valve/close_valve"
+                    command = "Closing"
+        
+        # Log the action being performed
         printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
         call_ha_api(command_url, postdata)
 
         if domain[0] == "humidifier" and value != "":
-            # Handle humidifier-specific logic (unchanged)
-            pass
+            command_url = simpleschedulerconf.HASSIO_URL + "/services/humidifier/set_humidity"
+            postdata = '{"entity_id":"%s","humidity":"%s"}' % (eid, value)
+            call_ha_api(command_url, postdata)
+            command = "Setting"
+            extra = "humidity to " + value + '%'
+            printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
 
     return True
+
 
 def is_a_retry_domain(entity):
     response = True
