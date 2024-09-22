@@ -668,10 +668,10 @@ def call_ha_api(command_url: str, post_data: str):
 def call_ha(eid_list, action, passedvalue, friendly_name):
     if not isinstance(eid_list, list):
         eid_list = {eid_list}
+        
     for eid in eid_list:
         command = "Turning " + action.upper()
         extra = ""
-        v = ""
         value = passedvalue.upper()
         domain = eid.split(".")
         command_url = simpleschedulerconf.HASSIO_URL + "/services/" + domain[0] + "/turn_" + action
@@ -681,94 +681,68 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
             if domain[0] == "light" and value != "":
                 pieces = value.split("|")
                 part_one = pieces[0]
-                if len(pieces) > 1:
-                    part_two = pieces[1]
-                else:
-                    part_two = ''
+                part_two = pieces[1] if len(pieces) > 1 else ''
 
                 if part_one[0] == "A":
-                    v = int(part_one[1:])
-                    extra = "to %d" % v
+                    brightness = int(part_one[1:])
+                    extra = f"to {brightness}"
+                    postdata = '{"entity_id":"%s","brightness":"%d"}' % (eid, brightness)
                 elif part_one.isdigit():
-                    v = int(int(part_one) * 2.55)
-                    extra = "to " + part_one + '%'
-                postdata = '{"entity_id":"%s","brightness":"%d"}' % (eid, v)
+                    brightness = int(int(part_one) * 2.55)
+                    extra = f"to {part_one}%"
+                    postdata = '{"entity_id":"%s","brightness":"%d"}' % (eid, brightness)
 
                 if part_two:
                     if part_two[0] == "K":
                         kelvin = int(part_two[1:])
-                        postdata = '{"entity_id":"%s","brightness":"%d","color_temp_kelvin":"%d"}' % (eid, v, kelvin)
+                        postdata = '{"entity_id":"%s","brightness":"%d","color_temp_kelvin":"%d"}' % (eid, brightness, kelvin)
                     else:
                         HEX_color = part_two
-                        rgb = list(int(HEX_color[i:i + 2], 16) for i in (0, 2, 4))
-                        postdata = '{"entity_id":"%s","brightness":"%d","rgb_color":%s}' % (eid, v, rgb)
+                        rgb = [int(HEX_color[i:i+2], 16) for i in (0, 2, 4)]
+                        postdata = '{"entity_id":"%s","brightness":"%d","rgb_color":%s}' % (eid, brightness, rgb)
 
             if domain[0] == "fan" and value != "":
-                v = value
-                extra = "to " + v + '%'
-                postdata = '{"entity_id":"%s","percentage":"%s"}' % (eid, v)
+                extra = f"to {value}%"
+                postdata = '{"entity_id":"%s","percentage":"%s"}' % (eid, value)
 
-            if domain[0] == "cover":
-                if value != "":
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/cover/set_cover_position"
-                    postdata = '{"entity_id":"%s","position":"%s"}' % (eid, value)
-                    command = "Setting"
-                    extra = "position to " + value + '%'
-                else:
-                    if action == "on":
-                        command_url = simpleschedulerconf.HASSIO_URL + "/services/cover/open_cover"
-                        command = "Opening"
+            if domain[0] == "cover" and value != "":
+                command_url = simpleschedulerconf.HASSIO_URL + "/services/cover/set_cover_position"
+                postdata = '{"entity_id":"%s","position":"%s"}' % (eid, value)
+                extra = f"position to {value}%"
 
-            if domain[0] == "valve":
-                if value != "":
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/valve/set_valve_position"
-                    postdata = '{"entity_id":"%s","position":"%s"}' % (eid, value)
-                    command = "Setting"
-                    extra = "position to " + value + '%'
-                else:
-                    if action == "on":
-                        command_url = simpleschedulerconf.HASSIO_URL + "/services/valve/open_valve"
-                        command = "Opening"
+            if domain[0] == "valve" and value != "":
+                command_url = simpleschedulerconf.HASSIO_URL + "/services/valve/set_valve_position"
+                postdata = '{"entity_id":"%s","position":"%s"}' % (eid, value)
+                extra = f"position to {value}%"
 
             if domain[0] == "climate" and value != "":
-                if value[0] == "O":
-                    v = value[1:]
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v)
-                    command = "Setting"
-                    extra = "fan_mode to " + v + '°'
+                # Set the fan mode instead of temperature
+                command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
+                postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, value)
+                extra = f"fan mode to {value}"
 
         else:
+            # Handling for "off" or similar actions
             if domain[0] == "cover":
                 command_url = simpleschedulerconf.HASSIO_URL + "/services/cover/close_cover"
                 command = "Closing"
-
+                
             if domain[0] == "valve":
                 command_url = simpleschedulerconf.HASSIO_URL + "/services/valve/close_valve"
                 command = "Closing"
 
+        # Logging and API call
         printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
         call_ha_api(command_url, postdata)
-
-        if domain[0] == "climate" and value != "":
-            if value[0] != "O":
-                command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, value)
-                call_ha_api(command_url, postdata)
-                command = "Setting"
-                extra = "fan_mode to " + value + '°'
-                printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
 
         if domain[0] == "humidifier" and value != "":
             command_url = simpleschedulerconf.HASSIO_URL + "/services/humidifier/set_humidity"
             postdata = '{"entity_id":"%s","humidity":"%s"}' % (eid, value)
+            extra = f"humidity to {value}%"
             call_ha_api(command_url, postdata)
-            command = "Setting"
-            extra = "humidity to " + value + '%'
             printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
 
     return True
-
 
 def is_a_retry_domain(entity):
     response = True
