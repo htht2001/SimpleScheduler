@@ -731,7 +731,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         command = "Opening"
 
             if domain[0] == "climate" and value != "":
-                if value[0] == "O":
+                if value[0] == "T":
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
                     postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, v)
@@ -743,6 +743,22 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
                     postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v.lower())
+                    command = "Setting"
+                    extra = "temperature to " + v + '°'
+
+            if domain[0] == "climate" and value != "":
+                if value[0] == "M":
+                    v = value[1:]
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/climate.set_hvac_mode"
+                    postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, v.lower())
+                    command = "Setting"
+                    extra = "temperature to " + v + '°'
+
+            if domain[0] == "climate" and value != "":
+                if value[0] == "S":
+                    v = value[1:]
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/climate.set_swing_mode"
+                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
