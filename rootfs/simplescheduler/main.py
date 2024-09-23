@@ -749,7 +749,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
             if domain[0] == "climate" and value != "":
                 if value[0] == "M":
                     v = value[1:]
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/climate.set_hvac_mode"
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
                     postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, v.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
