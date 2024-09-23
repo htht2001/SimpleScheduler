@@ -758,12 +758,14 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
         printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
         call_ha_api(command_url, postdata)
 
-        if domain[0] == "climate" and value != "":
-            if value[0] != "O":
-                command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
-                postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, value)
-                command = "Setting"
-                extra = "temperature to " + value + '°'
+#        if domain[0] == "climate" and value != "":
+#            if value[0] != "O":
+#                command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
+#                postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, value)
+#                call_ha_api(command_url, postdata)
+#                command = "Setting"
+#                extra = "temperature to " + value + '°'
+#                printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
 
         if domain[0] == "humidifier" and value != "":
             command_url = simpleschedulerconf.HASSIO_URL + "/services/humidifier/set_humidity"
