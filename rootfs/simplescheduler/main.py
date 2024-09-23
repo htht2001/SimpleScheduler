@@ -282,14 +282,10 @@ def utility_processor():
                 if prefix == 'P':
                     extra = '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'T':
-                    if v[0] == 'T':
+                    if v[0] == 'O':
                         v = v[1:]
                         extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
-                    if v[0] == 'F':
-                        v = v[1:]
-                        extra = '<span class="event-type-to"><i class="mdi mdi-fan" aria-hidden="true"></i>' + v + '&deg;</span>'
-                    if v[0] == 'M':
-                        v = v[1:]
+                    else:
                         extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
                 if prefix == 'H':
                     extra = '<span class="event-type-h"><i class="mdi mdi-water-percent" aria-hidden="true"></i>' + v + '%</span>'
@@ -742,7 +738,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
-            if domain[0] == "climate" and value != "":
                 if value[0] == "F":
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
@@ -750,7 +745,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
-            if domain[0] == "climate" and value != "":
                 if value[0] == "M":
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
@@ -758,7 +752,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
-            if domain[0] == "climate" and value != "":
                 if value[0] == "S":
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
