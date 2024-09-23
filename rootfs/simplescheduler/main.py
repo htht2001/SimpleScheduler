@@ -285,9 +285,9 @@ def utility_processor():
                     if v[0] == 'T':
                         v = v[1:]
                         extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
-                    if v == 'Fmedium':
+                    if v[0] == 'F':
                         v = v[1:]
-                        extra = '<span class="event-type-to"><i class="mdi mdi-fan-speed-1" aria-hidden="true"></i>'
+                        extra = '<span class="event-type-to"><i class="mdi mdi-fan" aria-hidden="true"></i>' + v
                     if v[0] == 'M':
                         v = v[1:]
                         extra = '<span class="event-type-to"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
