@@ -734,7 +734,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 if value[0] == "O":
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, value)
+                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v)
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
