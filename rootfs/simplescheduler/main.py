@@ -287,7 +287,7 @@ def utility_processor():
                         extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
                     if v[0] == 'F':
                         v = v[1:]
-                        extra = '<span class="event-type-to"><i class="mdi mdi-fan" aria-hidden="true"></i>' + v
+                        extra = '<span class="event-type-to"><i class="mdi mdi-fan" aria-hidden="true"></i>' + v + '&deg;</span>'
                     if v[0] == 'M':
                         v = v[1:]
                         extra = '<span class="event-type-to"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
