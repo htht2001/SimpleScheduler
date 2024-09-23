@@ -1,42 +1,3 @@
-
-import datetime
-
-def set_climate_fan_mode(schedule_entry):
-    # Example input: "16:30>TF|High"
-    try:
-        time_part, fan_mode_part = schedule_entry.split('>')
-        fan_mode_code, fan_mode_value = fan_mode_part.split('|')
-
-        # Verify the fan mode code is "TF"
-        if fan_mode_code != "TF":
-            return  # Ignore invalid entries
-
-        # Convert time to datetime for comparison or scheduling
-        schedule_time = datetime.datetime.strptime(time_part, "%H:%M").time()
-        
-        # Define the mapping between the fan modes and the corresponding HA fan mode values
-        fan_mode_mapping = {
-            "High": "high",
-            "medium": "medium",
-            "low": "low",
-            "automaton": "auto"
-        }
-
-        # Get the corresponding fan mode for Home Assistant
-        fan_mode = fan_mode_mapping.get(fan_mode_value.lower())
-        
-        if fan_mode:
-            # Send the request to Home Assistant to set the fan mode
-            entity_id = "your_climate_entity_id"  # Replace with your actual climate entity ID
-            command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-            payload = {"entity_id": entity_id, "fan_mode": fan_mode}
-            requests.post(command_url, json=payload, timeout=request_timeout)
-            print(f"Fan mode set to {fan_mode} at {schedule_time}")
-        else:
-            print(f"Invalid fan mode: {fan_mode_value}")
-    except ValueError as e:
-        print(f"Invalid schedule entry format: {schedule_entry} - Error: {str(e)}")
-
 from flask import Flask, render_template, request, redirect, make_response
 import paho.mqtt.client as mqtt
 import flask.cli
@@ -770,7 +731,14 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         command = "Opening"
 
             if domain[0] == "climate" and value != "":
-    set_climate_fan_mode("16:30>TF|High")  # Example call, replace with your actual variable
+
+                    if value[:3].upper() == "TFO":
+                        fan_mode = value[3:].lower()  # Extract the fan mode (e.g., 'low')
+                        command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
+                        postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, fan_mode)
+                        command = "Setting"
+                        extra = "fan mode to " + fan_mode
+        
                 if value[0] == "O":
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
