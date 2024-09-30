@@ -756,15 +756,23 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
                 if len(value) > 5:
                     fen = value[5]
+                    if fen == "a":
+                        v_fen = "auto"
+                    elif fen == "1":
+                        v_fen = "low"
+                    elif fen == "2":
+                        v_fen = "medium"
+                    elif fen == "3":
+                        v_fen = "high"
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v.lower())
+                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v_fen.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
                 if len(value) > 6:
                     swing = value[6]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
-                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v.lower())
+                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, swing.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
