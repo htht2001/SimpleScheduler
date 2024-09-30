@@ -733,9 +733,18 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         command_url = simpleschedulerconf.HASSIO_URL + "/services/valve/open_valve"
                         command = "Opening"
 
+
+
+
+
+
             if domain[0] == "climate" and value != "":
                 mode = ""; tempe = ""; fen = ""; swing = ""
-                mode = value[0]
+                if len(value) > 0:
+                    mode = value[0]
+
+
+
 
                 if len(value) > 1:
                     tempe = value[1:5]
@@ -747,9 +756,17 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
                 if len(value) > 5:
                     fen = value[5]
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
+                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v.lower())
+                    command = "Setting"
+                    extra = "temperature to " + v + '°'
+
                 if len(value) > 6:
                     swing = value[6]
-
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
+                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v.lower())
+                    command = "Setting"
+                    extra = "temperature to " + v + '°'
 
 
 
@@ -762,26 +779,27 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
    #                 command = "Setting"
   #                  extra = "temperature to " + v + '°'
 
-                if value[0] == "F":
-                    v = value[1:]
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v.lower())
-                    command = "Setting"
-                    extra = "temperature to " + v + '°'
+                    #             if value[0] == "F":
+                    # v = value[1:]
+                    #command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
+                    #postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v.lower())
+                    #command = "Setting"
+                # extra = "temperature to " + v + '°'
 
-                if value[0] == "M":
-                    v = value[1:]
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
-                    postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, v.lower())
-                    command = "Setting"
-                    extra = "temperature to " + v + '°'
+                    #  if value[0] == "M":
+                    #    v = value[1:]
+                    #   command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
+                    #   postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, v.lower())
+                    #   command = "Setting"
+                #  extra = "temperature to " + v + '°'
 
-                if value[0] == "S":
-                    v = value[1:]
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
-                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v.lower())
-                    command = "Setting"
-                    extra = "temperature to " + v + '°'
+                    #  if value[0] == "S":
+                    #     v = value[1:]
+                    #     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
+                    #     postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v.lower())
+                    #     command = "Setting"
+        #     extra = "temperature to " + v + '°'
+
 
         else:
             if domain[0] == "cover":
