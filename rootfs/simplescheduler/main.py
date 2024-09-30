@@ -757,7 +757,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
 
                 if "F" in value:
-                    fen = value[5]
+                    d = value.find("F")
+                    fen = value[d+1]
                     if fen == "0":
                         v_fen = "auto"
                     elif fen == "1":
