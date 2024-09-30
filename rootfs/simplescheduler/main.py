@@ -741,7 +741,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
             if domain[0] == "climate" and value != "":
                 mode = ""; tempe = ""; fen = ""; swing = ""
                 if "M" in value:
-                    mode = value[0]
+                    d = value.find("M")
+                    mode = value[d+1]
 
 
 
@@ -759,7 +760,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 if "F" in value:
                     d = value.find("F")
                     fen = value[d+1]
-                    if fen == "0":
+                    if fen == "A":
                         v_fen = "auto"
                     elif fen == "1":
                         v_fen = "low"
