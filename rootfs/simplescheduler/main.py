@@ -773,11 +773,19 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
                 if len(value) > 6:
                     swing = value[6]
+                    if swing == "0":
+                        v_swing = "off"
+                    elif swing == "1":
+                        v_swing = "vertical"
+                    elif swing == "2":
+                        v_swing = "horizontal"
+                    elif swing == "3":
+                        v_swing = "both"
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
                     postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, swing.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
-
+                    call_ha_api(command_url, postdata)
 
 
 
@@ -821,7 +829,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 command = "Closing"
 
         printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
- #       call_ha_api(command_url, postdata)
+        call_ha_api(command_url, postdata)
 
 #        if domain[0] == "climate" and value != "":
 #            if value[0] != "O":
