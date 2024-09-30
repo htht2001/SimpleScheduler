@@ -774,7 +774,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     call_ha_api(command_url, postdata)
 
                 if "S" in value:
-                    swing = value[6]
+                    d = value.find("S")
+                    swing = value[d+1]
                     if swing == "0":
                         v_swing = "off"
                     elif swing == "1":
