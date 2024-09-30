@@ -734,12 +734,33 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         command = "Opening"
 
             if domain[0] == "climate" and value != "":
-                if value[0] == "T":
-                    v = value[1:]
+                mode = ""; tempe = ""; fen = ""; swing = ""
+                mode = value[0]
+
+                if len(value) > 1:
+                    tempe = value[1:5]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
-                    postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, "22")
+                    postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, v)
                     command = "Setting"
                     extra = "temperature to " + v + '°'
+
+
+                if len(value) > 5:
+                    fen = value[5]
+                if len(value) > 6:
+                    swing = value[6]
+
+
+
+
+
+
+  #              if value[0] == "T":
+  #                  v = value[1:]
+   #                 command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
+   #                 postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, v)
+   #                 command = "Setting"
+  #                  extra = "temperature to " + v + '°'
 
                 if value[0] == "F":
                     v = value[1:]
