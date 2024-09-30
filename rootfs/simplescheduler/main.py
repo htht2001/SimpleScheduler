@@ -736,8 +736,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     mode = value[d+1]
 
 
-
-
                 if "E" in value:
                     d = value.find("E")
                     tempe = value[d+1:d+5]
