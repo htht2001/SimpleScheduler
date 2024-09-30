@@ -757,7 +757,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
                 if len(value) > 5:
                     fen = value[5]
-                    if fen == "a":
+                    if fen == "0":
                         v_fen = "auto"
                     elif fen == "1":
                         v_fen = "low"
