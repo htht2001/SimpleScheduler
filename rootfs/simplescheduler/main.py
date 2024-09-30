@@ -740,14 +740,15 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
             if domain[0] == "climate" and value != "":
                 mode = ""; tempe = ""; fen = ""; swing = ""
-                if len(value) > 0:
+                if "M" in value:
                     mode = value[0]
 
 
 
 
-                if len(value) > 1:
-                    tempe = value[1:5]
+                if "T" in value:
+                    d = value.find("T")
+                    tempe = value[d+1:d+5]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
                     postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, tempe)
                     command = "Setting"
@@ -755,7 +756,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     call_ha_api(command_url, postdata)
 
 
-                if len(value) > 5:
+                if "F" in value:
                     fen = value[5]
                     if fen == "0":
                         v_fen = "auto"
@@ -771,7 +772,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     extra = "temperature to " + v + '°'
                     call_ha_api(command_url, postdata)
 
-                if len(value) > 6:
+                if "S" in value:
                     swing = value[6]
                     if swing == "0":
                         v_swing = "off"
