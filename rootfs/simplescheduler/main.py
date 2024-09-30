@@ -737,7 +737,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 if value[0] == "T":
                     v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
-                    postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, v+1)
+                    postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, v)
                     command = "Setting"
                     extra = "temperature to " + v + '°'
 
