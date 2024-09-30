@@ -752,6 +752,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, tempe)
                     command = "Setting"
                     extra = "temperature to " + v + '°'
+                    call_ha_api(command_url, postdata)
 
 
                 if len(value) > 5:
@@ -768,6 +769,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v_fen.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
+                    call_ha_api(command_url, postdata)
 
                 if len(value) > 6:
                     swing = value[6]
@@ -819,7 +821,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 command = "Closing"
 
         printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
-        call_ha_api(command_url, postdata)
+ #       call_ha_api(command_url, postdata)
 
 #        if domain[0] == "climate" and value != "":
 #            if value[0] != "O":
