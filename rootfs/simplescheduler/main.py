@@ -782,7 +782,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     elif swing == "3":
                         v_swing = "both"
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
-                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, swing.lower())
+                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v_swing.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
                     call_ha_api(command_url, postdata)
