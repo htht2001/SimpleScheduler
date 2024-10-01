@@ -1,5 +1,5 @@
 ---
-version: "4.01"
+version: "4.02"
 name: Simple Scheduler
 description: Simple timer on weekly base
 slug: simplescheduler
