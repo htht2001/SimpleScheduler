@@ -738,10 +738,9 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
                 if "E" in value:
                     start = value.find("E")+1
+                    stop = start + 2
                     if value[start+1] == ".":
                         stop = start + 4
-                    else:
-                        stop = start + 2
                     tempe = value[start:stop]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
                     postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, tempe)
@@ -752,17 +751,16 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
                 if "F" in value:
                     d = value.find("F")
-                    fen = value[d+1]
-                    if fen == "A":
-                        v_fen = "auto"
-                    elif fen == "1":
-                        v_fen = "low"
-                    elif fen == "2":
-                        v_fen = "medium"
-                    elif fen == "3":
-                        v_fen = "high"
+                    fan = value[d+1]
+                    fan_mapping = {
+                        "A": "auto",
+                        "1": "low",
+                        "2": "medium",
+                        "3": "high"
+                    }
+                    v_fan = fan_mapping.get(fan, "unknown")
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v_fen.lower())
+                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v_fan)
                     command = "Setting"
                     extra = "temperature to " + v + '°'
                     call_ha_api(command_url, postdata)
@@ -770,16 +768,15 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 if "S" in value:
                     d = value.find("S")
                     swing = value[d+1]
-                    if swing == "0":
-                        v_swing = "off"
-                    elif swing == "1":
-                        v_swing = "vertical"
-                    elif swing == "2":
-                        v_swing = "horizontal"
-                    elif swing == "3":
-                        v_swing = "both"
+                    swing_mapping = {
+                        "0": "off",
+                        "1": "vertical",
+                        "2": "horizontal",
+                        "3": "both"
+                    }
+                    v_swing = swing_mapping.get(swing, "unknown")
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
-                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v_swing.lower())
+                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v_swing)
                     command = "Setting"
                     extra = "temperature to " + v + '°'
                     call_ha_api(command_url, postdata)
