@@ -731,53 +731,33 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         command = "Opening"
 
             if domain[0] == "climate" and value != "":
-                if "M" in value:
-                    d = value.find("M")
-                    mode = value[d+1]
-
-
-                if "E" in value:
-                    start = value.find("E")+1
-                    stop = start + 2
-                    if value[start+1] == ".":
-                        stop = start + 4
-                    tempe = value[start:stop]
+                if value[0] == "T":
+                    v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
-                    postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, tempe)
+                    postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, v)
                     command = "Setting"
                     extra = "temperature to " + v + '°'
-                    call_ha_api(command_url, postdata)
 
-
-                if "F" in value:
-                    d = value.find("F")
-                    fan = value[d+1]
-                    fan_mapping = {
-                        "A": "auto",
-                        "1": "low",
-                        "2": "medium",
-                        "3": "high"
-                    }
+                if value[0] == "F":
+                    v = value[1:]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, fan_mapping[fan])
+                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
-                    call_ha_api(command_url, postdata)
 
-                if "S" in value:
-                    d = value.find("S")
-                    swing = value[d+1]
-                    swing_mapping = {
-                        "0": "off",
-                        "1": "vertical",
-                        "2": "horizontal",
-                        "3": "both"
-                    }
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
-                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, swing_mapping[swing])
+                if value[0] == "M":
+                    v = value[1:]
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
+                    postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, v.lower())
                     command = "Setting"
                     extra = "temperature to " + v + '°'
-                    call_ha_api(command_url, postdata)
+
+                if value[0] == "S":
+                    v = value[1:]
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
+                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v.lower())
+                    command = "Setting"
+                    extra = "temperature to " + v + '°'
 
         else:
             if domain[0] == "cover":
@@ -792,13 +772,13 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
         call_ha_api(command_url, postdata)
 
 #        if domain[0] == "climate" and value != "":
- #           if value[0] != "O":
- #               command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
- #               postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, value)
+#            if value[0] != "O":
+#                command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
+#                postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, value)
 #                call_ha_api(command_url, postdata)
- #               command = "Setting"
+#                command = "Setting"
 #                extra = "temperature to " + value + '°'
-  #              printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
+#                printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
 
         if domain[0] == "humidifier" and value != "":
             command_url = simpleschedulerconf.HASSIO_URL + "/services/humidifier/set_humidity"
