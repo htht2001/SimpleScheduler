@@ -758,9 +758,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         "2": "medium",
                         "3": "high"
                     }
-                    v_fan = fan_mapping.get(fan, "unknown")
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
-                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, v_fan)
+                    postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, fan_mapping[fan])
                     command = "Setting"
                     extra = "temperature to " + v + '°'
                     call_ha_api(command_url, postdata)
@@ -774,9 +773,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         "2": "horizontal",
                         "3": "both"
                     }
-                    v_swing = swing_mapping.get(swing, "unknown")
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
-                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, v_swing)
+                    postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, swing_mapping[swing])
                     command = "Setting"
                     extra = "temperature to " + v + '°'
                     call_ha_api(command_url, postdata)
