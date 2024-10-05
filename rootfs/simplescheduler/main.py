@@ -287,6 +287,9 @@ def utility_processor():
                         extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
                     else:
                         extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
+                    if "_F3" in v:
+                        v = v.replace("_F3", "fan_ max")
+
                 if prefix == 'H':
                     extra = '<span class="event-type-h"><i class="mdi mdi-water-percent" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'B':
