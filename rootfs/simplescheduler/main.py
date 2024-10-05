@@ -293,11 +293,12 @@ def utility_processor():
                         "S2": "",
                         "S3": "",
 
-                        "MC": "",
-                        "MH": "",
-                        "MW": "",
-                        "M": "",
-                        "M": "",
+                        "MO": "off",
+                        "MC": "cool",
+                        "MH": "heat",
+                        "MD": "dry",
+                        "MA": "auto",
+                        "MY": "fan_only",
 
                     }
                     if "F" in v:
@@ -772,7 +773,19 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 if "M" in value:
                     d = value.find("M")
                     mode = value[d+1]
-
+                    mode_mapping = {
+                        "o": "off",
+                        "c": "cool",
+                        "h": "heat",
+                        "d": "dry",
+                        "a": "auto",
+                        "y": "fan_only",
+                    }
+                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
+                    postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, mode_mapping[mode])
+                    command = "Setting"
+                    extra = "temperature to " + v + '°'
+                    call_ha_api(command_url, postdata)
 
                 if "T" in value:
                     start = value.find("T")+1
@@ -789,7 +802,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
 
                 if "F" in value:
                     d = value.find("F")
-                    fan = value[d+1]
+                    fan = value[d + 1]
                     fan_mapping = {
                         "A": "auto",
                         "1": "low",
@@ -801,6 +814,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     command = "Setting"
                     extra = "temperature to " + v + '°'
                     call_ha_api(command_url, postdata)
+
 
                 if "S" in value:
                     d = value.find("S")
