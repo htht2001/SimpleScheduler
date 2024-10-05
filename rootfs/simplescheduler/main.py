@@ -282,14 +282,30 @@ def utility_processor():
                 if prefix == 'P':
                     extra = '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'T':
+                    map_icon = {
+                        "FA": "",
+                        "F1": "",
+                        "F2": "",
+                        "F3": "",
+                        "S0": "",
+                        "S1": "",
+                        "S2": "",
+                        "S3": "",
+
+                    }
                     if v[0] == 'O':
                         v = v[1:]
                         extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
                     else:
                         extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
-                    if "_F3" in v:
-                        v = v.replace("_F3", '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>')
+                    if "F3" in v:
+                        v = v.replace("F3", '<span class="event-type-t"><i class="mdi:fan-speed-3" aria-hidden="true"></i>')
                         extra = v
+
+
+
+
+
                 if prefix == 'H':
                     extra = '<span class="event-type-h"><i class="mdi mdi-water-percent" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'B':
