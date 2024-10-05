@@ -301,7 +301,7 @@ def utility_processor():
                     if "F3" in v:
                         v = v.replace("F3", '<span class="event-type-t"><i class="mdi:fan-speed-3" aria-hidden="true"></i>')
                         extra = v
-
+                        extra = '<i class="mdi mdi-fan-speed-3" aria-hidden="true"></i>'
 
 
 
