@@ -283,25 +283,30 @@ def utility_processor():
                     extra = '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'T':
                     map_icon = {
-                        "FA": "",
-                        "F1": "",
-                        "F2": "",
-                        "F3": "",
+                        "FA": "<i class='mdi mdi-fan-auto' aria-hidden='true'></i>",
+                        "F1": "<i class='mdi mdi-fan-speed-1' aria-hidden='true'></i>",
+                        "F2": "<i class='mdi mdi-fan-speed-2' aria-hidden='true'></i>",
+                        "F3": "<i class='mdi mdi-fan-speed-3' aria-hidden='true'></i>",
                         "S0": "",
                         "S1": "",
                         "S2": "",
                         "S3": "",
 
                     }
-                    if v[0] == 'O':
-                        v = v[1:]
-                        extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
-                    else:
-                        extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
-                    if "F3" in v:
-                        v = v.replace("F3", '<span class="event-type-t"><i class="mdi:fan-speed-3" aria-hidden="true"></i>')
-                        extra = v
-                        extra = '<i class="mdi mdi-fan-speed-3" aria-hidden="true"></i>'
+                    if "F" in v:
+                        d = v[v.find("F"):v.find("F")+2]
+                        z = v.replace(d, map_icon[d])
+                        extra = z
+
+
+
+
+
+                    #if v[0] == 'O':
+                    #    v = v[1:]
+                     #   extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
+                   # else:
+                   #     extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
 
 
 
