@@ -288,8 +288,8 @@ def utility_processor():
                     else:
                         extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
                     if "_F3" in v:
-                        v = v.replace("_F3", "fan_ max")
-                        extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>' + v
+                        v = v.replace("_F3", '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>')
+                        extra = v
                 if prefix == 'H':
                     extra = '<span class="event-type-h"><i class="mdi mdi-water-percent" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'B':
