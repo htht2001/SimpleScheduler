@@ -774,12 +774,12 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     d = value.find("M")
                     mode = value[d+1]
                     mode_mapping = {
-                        "o": "off",
-                        "c": "cool",
-                        "h": "heat",
-                        "d": "dry",
-                        "a": "auto",
-                        "y": "fan_only",
+                        "O": "off",
+                        "C": "cool",
+                        "H": "heat",
+                        "D": "dry",
+                        "A": "auto",
+                        "Y": "fan_only",
                     }
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
                     postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, mode_mapping[mode])
