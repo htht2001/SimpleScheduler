@@ -283,23 +283,37 @@ def utility_processor():
                     extra = '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'T':
                     map_icon = {
-                        "FA": "<i class='mdi mdi-fan-auto' aria-hidden='true'></i>",
-                        "F1": "<i class='mdi mdi-fan-speed-1' aria-hidden='true'></i>",
-                        "F2": "<i class='mdi mdi-fan-speed-2' aria-hidden='true'></i>",
-                        "F3": "<i class='mdi mdi-fan-speed-3' aria-hidden='true'></i>",
+                        "FA": " <i class='mdi mdi-fan-auto' ></i> ",
+                        "F1": " <i class='mdi mdi-fan-speed-1' ></i> ",
+                        "F2": " <i class='mdi mdi-fan-speed-2' ></i> ",
+                        "F3": " <i class='mdi mdi-fan-speed-3' ></i> ",
+
                         "S0": "",
                         "S1": "",
                         "S2": "",
                         "S3": "",
 
+                        "MC": "",
+                        "MH": "",
+                        "MW": "",
+                        "M": "",
+                        "M": "",
+
                     }
                     if "F" in v:
                         d = v[v.find("F"):v.find("F")+2]
-                        z = v.replace(d, map_icon[d])
-                        extra = z
+                        v = v.replace(d, map_icon[d])
+                        extra = v
 
+                    if "S" in v:
+                        d = v[v.find("S"):v.find("S") + 2]
+                        v = v.replace(d, map_icon[d])
+                        extra = v
 
-
+                    if "M" in v:
+                        d = v[v.find("M"):v.find("M") + 2]
+                        v = v.replace(d, map_icon[d])
+                        extra = v
 
 
                     #if v[0] == 'O':
