@@ -774,8 +774,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     mode = value[d+1]
 
 
-                if "E" in value:
-                    start = value.find("E")+1
+                if "T" in value:
+                    start = value.find("T")+1
                     stop = start + 2
                     if value[start+1] == ".":
                         stop = start + 4
