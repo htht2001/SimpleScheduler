@@ -298,8 +298,9 @@ def utility_processor():
                         "MH": "heat",
                         "MD": "dry",
                         "MA": "auto",
-                        "MY": "fan_only",
+                        "MR": "fan_only",
 
+                        "T": "TEMP",
                     }
                     if "F" in v:
                         d = v[v.find("F"):v.find("F")+2]
@@ -316,7 +317,17 @@ def utility_processor():
                         v = v.replace(d, map_icon[d])
                         extra = v
 
+                    if "T" in v:
+                        d = v.find("T")
+                        if v[d + 2] == ".":
+                            tem = v[d+1:d+5]
+                        else:
+                            tem = v[d+1:d+3]
 
+
+                        v = v.replace(v[d], map_icon["T"])
+                        v = v.replace(tem, tem + "&deg;")
+                        extra = v
                     #if v[0] == 'O':
                     #    v = v[1:]
                      #   extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
@@ -779,12 +790,12 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         "H": "heat",
                         "D": "dry",
                         "A": "auto",
-                        "Y": "fan_only",
+                        "R": "fan_only",
                     }
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
                     postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, mode_mapping[mode])
                     command = "Setting"
-                    extra = "temperature to " + v + '°'
+                    extra = "mode to " + mode_mapping[mode]
                     call_ha_api(command_url, postdata)
 
                 if "T" in value:
@@ -796,7 +807,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
                     postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, tempe)
                     command = "Setting"
-                    extra = "temperature to " + v + '°'
+                    extra = "temperature to " + tempe + '°'
+                    printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))z
                     call_ha_api(command_url, postdata)
 
 
@@ -812,7 +824,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_fan_mode"
                     postdata = '{"entity_id":"%s","fan_mode":"%s"}' % (eid, fan_mapping[fan])
                     command = "Setting"
-                    extra = "temperature to " + v + '°'
+                    extra = "fan to " + fan_mapping[fan]
+                    printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
                     call_ha_api(command_url, postdata)
 
 
@@ -828,7 +841,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_swing_mode"
                     postdata = '{"entity_id":"%s","swing_mode":"%s"}' % (eid, swing_mapping[swing])
                     command = "Setting"
-                    extra = "temperature to " + v + '°'
+                    extra = "swing to " + swing_mapping[swing]
+                    printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
                     call_ha_api(command_url, postdata)
 
         else:
