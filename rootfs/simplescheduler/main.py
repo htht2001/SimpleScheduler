@@ -808,7 +808,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, tempe)
                     command = "Setting"
                     extra = "temperature to " + tempe + '°'
-                    printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))z
+                    printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
                     call_ha_api(command_url, postdata)
 
 
