@@ -319,7 +319,7 @@ def utility_processor():
 
                     if "T" in v:
                         d = v.find("T")
-                        if v[d + 2] == ".":
+                        if v[d + 3] == ".":
                             tem = v[d+1:d+5]
                         else:
                             tem = v[d+1:d+3]
@@ -801,7 +801,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                 if "T" in value:
                     start = value.find("T")+1
                     stop = start + 2
-                    if value[start+1] == ".":
+                    if value[start+2] == ".":
                         stop = start + 4
                     tempe = value[start:stop]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
