@@ -293,7 +293,7 @@ def utility_processor():
                         "S2": "horizontal",
                         "S3": "both",
 
-                        "MO": "off",
+                        "MO": "on",
                         "MC": "cool",
                         "MH": "heat",
                         "MD": "dry",
@@ -795,15 +795,16 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     }
                     if value[d+1] == "O":
                         command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/turn_on"
-                        postdata = '{"entity_id":"%s",}' % eid
+                        postdata = '{"entity_id":"%s",}' % (eid)
                         command = "Setting"
                         extra = "turn_on"
+                        call_ha_api(command_url, postdata)
                     else:
                         command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
                         postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, mode_mapping[mode])
                         command = "Setting"
                         extra = "mode to " + mode_mapping[mode]
-                    call_ha_api(command_url, postdata)
+                        call_ha_api(command_url, postdata)
 
                 if "T" in value:
                     start = value.find("T")+1
