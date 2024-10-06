@@ -786,17 +786,23 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     d = value.find("M")
                     mode = value[d+1]
                     mode_mapping = {
-                        "O": "off",
+                        "O": "on",
                         "C": "cool",
                         "H": "heat",
                         "D": "dry",
                         "A": "auto",
                         "R": "fan_only",
                     }
-                    command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
-                    postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, mode_mapping[mode])
-                    command = "Setting"
-                    extra = "mode to " + mode_mapping[mode]
+                    if d+1 == "O":
+                        command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/turn_on"
+                        postdata = '{"entity_id":"%s",}' % eid
+                        command = "Setting"
+                        extra = "turn_on"
+                    else:
+                        command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_hvac_mode"
+                        postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, mode_mapping[mode])
+                        command = "Setting"
+                        extra = "mode to " + mode_mapping[mode]
                     call_ha_api(command_url, postdata)
 
                 if "T" in value:
@@ -811,7 +817,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     extra = "temperature to " + tempe + '°'
                     printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
                     call_ha_api(command_url, postdata)
-
 
                 if "F" in value:
                     d = value.find("F")
@@ -828,7 +833,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     extra = "fan to " + fan_mapping[fan]
                     printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
                     call_ha_api(command_url, postdata)
-
 
                 if "S" in value:
                     d = value.find("S")
