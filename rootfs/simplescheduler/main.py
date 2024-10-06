@@ -283,15 +283,15 @@ def utility_processor():
                     extra = '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'T':
                     map_icon = {
-                        "FA": " <i class='mdi mdi-fan-auto' ></i> ",
-                        "F1": " <i class='mdi mdi-fan-speed-1' ></i> ",
-                        "F2": " <i class='mdi mdi-fan-speed-2' ></i> ",
-                        "F3": " <i class='mdi mdi-fan-speed-3' ></i> ",
+                        "FA": "<i class='mdi mdi-fan-auto' ></i>",
+                        "F1": "<i class='mdi mdi-fan-speed-1' ></i>",
+                        "F2": "<i class='mdi mdi-fan-speed-2' ></i>",
+                        "F3": "<i class='mdi mdi-fan-speed-3' ></i>",
 
-                        "S0": "",
-                        "S1": "",
-                        "S2": "",
-                        "S3": "",
+                        "S0": "off",
+                        "S1": "vertical",
+                        "S2": "horizontal",
+                        "S3": "both",
 
                         "MO": "off",
                         "MC": "cool",
@@ -302,6 +302,7 @@ def utility_processor():
 
                         "T": "TEMP",
                     }
+                    v = v.replace("_", " ")
                     if "F" in v:
                         d = v[v.find("F"):v.find("F")+2]
                         v = v.replace(d, map_icon[d])
