@@ -300,7 +300,7 @@ def utility_processor():
                         "MA": "auto",
                         "MR": "fan_only",
 
-                        "T": "<i class='mdi mdi-temperature-celsius' ></i>",
+                        "T": "",
                     }
                     v = v.replace("_", " ")
                     if "F" in v:
@@ -793,7 +793,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                         "A": "auto",
                         "R": "fan_only",
                     }
-                    if d+1 == "O":
+                    if value[d+1] == "O":
                         command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/turn_on"
                         postdata = '{"entity_id":"%s",}' % eid
                         command = "Setting"
