@@ -795,7 +795,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     }
                     if value[d+1] == "O":
                         command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/turn_on"
-                        postdata = '{"entity_id":"%s",}' % (eid)
+                        postdata = '{"entity_id":"%s"}' % eid
                         command = "Setting"
                         extra = "turn_on"
                         call_ha_api(command_url, postdata)
