@@ -300,7 +300,7 @@ def utility_processor():
                         "MA": "auto",
                         "MR": "fan_only",
 
-                        "T": "TEMP",
+                        "T": "<i class='mdi mdi-temperature-celsius' ></i>",
                     }
                     v = v.replace("_", " ")
                     if "F" in v:
