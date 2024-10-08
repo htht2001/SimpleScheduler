@@ -321,7 +321,6 @@ def utility_processor():
 
                     if "T" in v:
                         d = v.find("T")
-                        tem = ""
                         if len(v) > d + 3 and v[d + 3] == ".":
                             tem = v[d + 1:d + 5]
                         elif len(v) > d + 2:
@@ -329,7 +328,7 @@ def utility_processor():
 
 
                         v = v.replace(v[d], map_icon["T"])
-                        v = v.replace(tem, '<span class="event-type-p"><i %s&deg; aria-hidden="true"></i></span>'% tem)
+                        v = v.replace(tem, '<span ><i %s &deg; aria-hidden="true"></i></span>'% tem)
                         extra = v
                     #if v[0] == 'O':
                     #    v = v[1:]
