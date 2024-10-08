@@ -326,7 +326,7 @@ def utility_processor():
                         else:
                             tem = "error"
                         v = v.replace(v[d], map_icon["T"])
-                        v = v.replace(tem, '<span style="color: #2DA9F2;"> aria-hidden="true">%s&deg;</span>' % tem)
+                        v = v.replace(tem, '<span style="color: #2DA9F2;">%s&deg;</span>' % tem)
                         extra = v
 
 
