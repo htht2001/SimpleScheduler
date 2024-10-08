@@ -283,10 +283,10 @@ def utility_processor():
                     extra = '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i>' + v + '%</span>'
                 if prefix == 'T':
                     map_icon = {
-                        "FA": "<i class='mdi mdi-fan-auto' ></i>",
-                        "F1": "<i class='mdi mdi-fan-speed-1' ></i>",
-                        "F2": "<i class='mdi mdi-fan-speed-2' ></i>",
-                        "F3": "<i class='mdi mdi-fan-speed-3' ></i>",
+                        "FA": '<span class="event-type-p"><i class="mdi mdi-fan-auto" aria-hidden="true"></i></span>',
+                        "F1": '<span class="event-type-p"><i class="mdi mdi-fan-speed-1" aria-hidden="true"></i></span>',
+                        "F2": '<span class="event-type-p"><i class="mdi mdi-fan-speed-2" aria-hidden="true"></i></span>',
+                        "F3": '<span class="event-type-p"><i class="mdi mdi-fan-speed-3" aria-hidden="true"></i></span>',
 
                         "S0": '<span class="event-type-p"><i class="mdi mdi-arrow-horizontal-lock" aria-hidden="true"></i></span>',
                         "S1": '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i></span>',
@@ -302,6 +302,7 @@ def utility_processor():
 
                         "T": '<span class="event-type-p"><i class="mdi mdi-thermometer" aria-hidden="true"></i></span>',
                     }
+
                     v = v.replace("_", " ")
                     if "F" in v:
                         d = v[v.find("F"):v.find("F")+2]
@@ -320,9 +321,9 @@ def utility_processor():
 
                     if "T" in v:
                         d = v.find("T")
-                        tem = None
+                        tem = ""
                         if len(v) > d + 3 and v[d + 3] == ".":
-                            tem = v[d + 1:d + 5]  
+                            tem = v[d + 1:d + 5]
                         elif len(v) > d + 2:
                             tem = v[d + 1:d + 3]
 
@@ -787,7 +788,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     d = value.find("M")
                     mode = value[d+1]
                     mode_mapping = {
-                        "O": "on",
                         "C": "cool",
                         "H": "heat",
                         "D": "dry",
