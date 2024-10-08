@@ -300,7 +300,7 @@ def utility_processor():
                         "MA": '<span class="event-type-p"><i class="mdi mdi-thermostat-auto" aria-hidden="true"></i></span>',
                         "MR": '<span class="event-type-p"><i class="mdi mdi-fan" aria-hidden="true"></i></span>',
 
-                        "T": '<span class="event-type-p"><i class="mdi mdi-thermometer" aria-hidden="true"></i></span>',
+                        "T": '<span class="event-type-p"><i class="mdi mdi-thermometer" \baria-hidden="true"></i></span>',
                     }
 
                     v = v.replace("_", " ")
@@ -326,7 +326,7 @@ def utility_processor():
                         elif len(v) > d + 2:
                             tem = v[d + 1:d + 3]
 
-                        
+
                         v = v.replace(v[d], map_icon["T"])
                         v = v.replace(tem, '<span style="color: #2DA9F2;"><i aria-hidden="true">%s&deg;</i></span>' % tem)
                         extra = v
