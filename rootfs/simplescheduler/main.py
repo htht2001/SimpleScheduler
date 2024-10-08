@@ -304,20 +304,12 @@ def utility_processor():
                     }
 
                     v = v.replace("_", " ")
-                    if "F" in v:
-                        d = v[v.find("F"):v.find("F")+2]
-                        v = v.replace(d, map_icon[d])
-                        extra = v
+                    for code in ["F", "S", "M"]:
+                        if code in v:
+                            d = v[v.find(code):v.find(code) + 2]
+                            v = v.replace(d, map_icon[d])
+                            extra = v
 
-                    if "S" in v:
-                        d = v[v.find("S"):v.find("S") + 2]
-                        v = v.replace(d, map_icon[d])
-                        extra = v
-
-                    if "M" in v:
-                        d = v[v.find("M"):v.find("M") + 2]
-                        v = v.replace(d, map_icon[d])
-                        extra = v
 
                     if "T" in v:
                         d = v.find("T")
@@ -325,18 +317,9 @@ def utility_processor():
                             tem = v[d + 1:d + 5]
                         elif len(v) > d + 2:
                             tem = v[d + 1:d + 3]
-
-
                         v = v.replace(v[d], map_icon["T"])
                         v = v.replace(tem, '<span style="color: #2DA9F2;"><i aria-hidden="true">%s&deg;</i></span>' % tem)
                         extra = v
-                    #if v[0] == 'O':
-                    #    v = v[1:]
-                     #   extra = '<span class="event-type-to"><i class="mdi mdi-thermometer" aria-hidden="true"></i>' + v + '&deg;</span>'
-                   # else:
-                   #     extra = '<span class="event-type-t"><i class="mdi mdi-power" aria-hidden="true"></i>' + v + '&deg;</span>'
-
-
 
 
                 if prefix == 'H':
@@ -863,14 +846,6 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
         printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
         call_ha_api(command_url, postdata)
 
-#        if domain[0] == "climate" and value != "":
- #           if value[0] != "O":
- #               command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
- #               postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, value)
-#                call_ha_api(command_url, postdata)
- #               command = "Setting"
-#                extra = "temperature to " + value + '°'
-  #              printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
 
         if domain[0] == "humidifier" and value != "":
             command_url = simpleschedulerconf.HASSIO_URL + "/services/humidifier/set_humidity"
