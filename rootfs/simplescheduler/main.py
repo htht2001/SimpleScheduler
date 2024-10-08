@@ -319,6 +319,8 @@ def utility_processor():
                             tem = v[d + 1:d + 5]
                         elif len(v) > d + 2:
                             tem = v[d + 1:d + 3]
+                        else:
+                            tem = "error"
                         v = v.replace(v[d], map_icon["T"])
                         v = v.replace(tem, '<span style="color: #2DA9F2;"><i aria-hidden="true">%s&deg;</i></span>' % tem)
                         extra = v
