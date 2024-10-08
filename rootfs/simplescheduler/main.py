@@ -290,7 +290,7 @@ def utility_processor():
 
                         "S0": '<span class="event-type-p"><i class="mdi mdi-arrow-oscillating" aria-hidden="true"></i></span>',
                         "S1": '<span class="event-type-p"><i class="mdi mdi-arrow-up-down" aria-hidden="true"></i></span>',
-                        "S2": '<span class="event-type-p"><i class="mdi mdi-arrow-Left-right" aria-hidden="true"></i></span>',
+                        "S2": '<span class="event-type-p"><i class="mdi mdi-arrow-left-right" aria-hidden="true"></i></span>',
                         "S3": '<span class="event-type-p"><i class="mdi mdi-arrow-all" aria-hidden="true"></i></span>',
 
                         "MO": '<span class="event-type-p"><i class="mdi mdi-power" aria-hidden="true"></i></span>',
