@@ -320,10 +320,11 @@ def utility_processor():
 
                     if "T" in v:
                         d = v.find("T")
-                        if v[d + 3] == ".":
-                            tem = v[d+1:d+5]
-                        else:
-                            tem = v[d+1:d+3]
+                        tem = None
+                        if len(v) > d + 3 and v[d + 3] == ".":
+                            tem = v[d + 1:d + 5]  
+                        elif len(v) > d + 2:
+                            tem = v[d + 1:d + 3]
 
 
                         v = v.replace(v[d], map_icon["T"])
