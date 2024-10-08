@@ -329,7 +329,7 @@ def utility_processor():
 
 
                         v = v.replace(v[d], map_icon["T"])
-                        v = v.replace(tem, tem + "&deg;")
+                        v = v.replace(tem, f'<span class="event-type-p"><i {tem}&deg; aria-hidden="true"></i></span>')
                         extra = v
                     #if v[0] == 'O':
                     #    v = v[1:]
