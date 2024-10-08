@@ -300,7 +300,7 @@ def utility_processor():
                         "MA": '<span class="event-type-p"><i class="mdi mdi-thermostat-auto" aria-hidden="true"></i></span>',
                         "MR": '<span class="event-type-p"><i class="mdi mdi-fan" aria-hidden="true"></i></span>',
 
-                        "T": '<span class="event-type-p"><i class="mdi mdi-thermometer" \baria-hidden="true"></i></span>',
+                        "T": "",
                     }
 
                     v = v.replace("_", " ")
