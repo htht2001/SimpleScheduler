@@ -309,7 +309,7 @@ def utility_processor():
                             a = v.find(code)
                             if len(v) >= a+2:
                                 d = v[a:a + 2]
-                                v = v.replace(d, map_icon[d])
+                                v = v.replace(d, map_icon.get(d, "error"))
                                 extra = v
 
 
