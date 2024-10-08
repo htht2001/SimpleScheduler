@@ -306,9 +306,11 @@ def utility_processor():
                     v = v.replace("_", " ")
                     for code in ["F", "S", "M"]:
                         if code in v:
-                            d = v[v.find(code):v.find(code) + 2]
-                            v = v.replace(d, map_icon[d])
-                            extra = v
+                            a = v.find(code)
+                            if len(v) >= a+1:
+                                d = v[a:a + 2]
+                                v = v.replace(d, map_icon[d])
+                                extra = v
 
 
                     if "T" in v:
