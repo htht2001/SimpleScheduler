@@ -307,7 +307,7 @@ def utility_processor():
                     for code in ["F", "S", "M"]:
                         if code in v:
                             a = v.find(code)
-                            if len(v) >= a+1:
+                            if len(v) >= a+2:
                                 d = v[a:a + 2]
                                 v = v.replace(d, map_icon[d])
                                 extra = v
