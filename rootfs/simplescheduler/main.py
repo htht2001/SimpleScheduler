@@ -288,19 +288,19 @@ def utility_processor():
                         "F2": "<i class='mdi mdi-fan-speed-2' ></i>",
                         "F3": "<i class='mdi mdi-fan-speed-3' ></i>",
 
-                        "S0": "off",
-                        "S1": "vertical",
-                        "S2": "horizontal",
-                        "S3": "both",
+                        "S0": '<span class="event-type-p"><i class="mdi mdi-arrow-oscillating-Off" aria-hidden="true"></i>%</span>',
+                        "S1": '<span class="event-type-p"><i class="mdi mdi-arrow-updown" aria-hidden="true"></i>%</span>',
+                        "S2": '<span class="event-type-p"><i class="mdi mdi-arrow-Leftright" aria-hidden="true"></i>%</span>',
+                        "S3": '<span class="event-type-p"><i class="mdi mdi-arrow-all" aria-hidden="true"></i>%</span>',
 
-                        "MO": "on",
-                        "MC": "cool",
-                        "MH": "heat",
+                        "MO": '<span class="event-type-p"><i class="mdi mdi-power" aria-hidden="true"></i>%</span>',
+                        "MC": '<span class="event-type-p"><i class="mdi mdi-Snow-flake" aria-hidden="true"></i>%</span>',
+                        "MH": '<span class="event-type-p"><i class="mdi mdi-fire" aria-hidden="true"></i>%</span>',
                         "MD": "dry",
-                        "MA": "auto",
-                        "MR": "fan_only",
+                        "MA": '<span class="event-type-p"><i class="mdi mdi-thermostat-auto" aria-hidden="true"></i>%</span>',
+                        "MR": '<span class="event-type-p"><i class="mdi mdi-fan" aria-hidden="true"></i>%</span>',
 
-                        "T": "",
+                        "T": '<span class="event-type-p"><i class="mdi mdi-thermometer" aria-hidden="true"></i>%</span>',
                     }
                     v = v.replace("_", " ")
                     if "F" in v:
