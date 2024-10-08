@@ -328,7 +328,7 @@ def utility_processor():
 
 
                         v = v.replace(v[d], map_icon["T"])
-                        v = v.replace(tem, '<span style="color: blue;"><i>%s&deg;</i></span>' % tem)
+                        v = v.replace(tem, '<span style="color: #2DA9F2;"><i>%s&deg;</i></span>' % tem)
                         extra = v
                     #if v[0] == 'O':
                     #    v = v[1:]
