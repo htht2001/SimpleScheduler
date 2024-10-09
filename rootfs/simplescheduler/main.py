@@ -305,7 +305,10 @@ def utility_processor():
                     }
 
                     v = v.replace("_", " ")
-
+                    for key in map_icon:
+                        if key in v:
+                            v = v.replace(key, map_icon[key])
+                    extra = v 
 
                 #    for code in ["F", "S", "M"]:
                 #        if code in v:
@@ -331,10 +334,7 @@ def utility_processor():
                         v = v.replace(tem, '<span style="color: #2DA9F2;">%s&deg;</span>' % tem)
                         extra = v
 
-                    for key in map_icon:
-                        if key in v:
-                            v = v.replace(key, map_icon[key])
-                    extra = v
+
 
 
                 if prefix == 'H':
