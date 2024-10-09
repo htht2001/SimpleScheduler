@@ -311,7 +311,7 @@ def utility_processor():
 
                     if "T" in v:
                         v = re.sub(r'T(\d{2}(?:\.\d)?)', r'<span style="color: #2DA9F2;">\1&deg;</span>', v)
-                    
+
                     v = v.replace("_", " ")
                     extra = v
 
@@ -787,11 +787,13 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     call_ha_api(command_url, postdata)
 
                 if "T" in value:
-                    start = value.find("T")+1
-                    stop = start + 2
-                    if value[start+2] == ".":
-                        stop = start + 4
-                    tempe = value[start:stop]
+                    match = re.search(r'T(\d+(\.\d+)?)', value)
+                    tempe = match.group(1)
+                 #   start = value.find("T")+1
+                #    stop = start + 2
+                 #   if value[start+2] == ".":
+                #        stop = start + 4
+                #    tempe = value[start:stop]
                     command_url = simpleschedulerconf.HASSIO_URL + "/services/climate/set_temperature"
                     postdata = '{"entity_id":"%s","temperature":"%s"}' % (eid, tempe)
                     command = "Setting"
