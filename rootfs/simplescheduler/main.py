@@ -301,7 +301,7 @@ def utility_processor():
                         "MA": '<span class="event-type-p"><i class="mdi mdi-thermostat-auto" aria-hidden="true"></i></span>',
                         "MR": '<span class="event-type-p"><i class="mdi mdi-fan" aria-hidden="true"></i></span>',
 
-
+                        "T": re.sub(r'T(\d{2}(?:\.\d)?)', r'<span style="color: #2DA9F2;">\1&deg;</span>', v)
                     }
 
                     v = v.replace("_", " ")
@@ -309,8 +309,8 @@ def utility_processor():
                         if key in v:
                             v = v.replace(key, map_icon[key])
 
-                    if "T" in v:
-                        v = re.sub(r'T(\d{2}(?:\.\d)?)', r'<span style="color: #2DA9F2;">\1&deg;</span>', v)
+                #    if "T" in v:
+                #        v = re.sub(r'T(\d{2}(?:\.\d)?)', r'<span style="color: #2DA9F2;">\1&deg;</span>', v)
 
                     #    d = v.find("T")
                     #    if len(v) > d + 3 and v[d + 3] == ".":
