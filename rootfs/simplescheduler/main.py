@@ -305,17 +305,19 @@ def utility_processor():
                     }
 
                     v = v.replace("_", " ")
-                    for code in ["F", "S", "M"]:
-                        if code in v:
-                            a = v.find(code)
-                            if len(v) >= a+2:
-                                d = v[a:a + 2]
-                                v = v.replace(d, map_icon.get(d, "error"))
-                                extra = v
 
-                    if "O" in value:
-                        v = v.replace("O", map_icon.get("O"))
-                        extra = v
+
+                #    for code in ["F", "S", "M"]:
+                #        if code in v:
+                #            a = v.find(code)
+                #            if len(v) >= a+2:
+                #                d = v[a:a + 2]
+                #                v = v.replace(d, map_icon.get(d, "error"))
+                #                extra = v
+
+                #    if "O" in value:
+                #        v = v.replace("O", map_icon.get("O"))
+                #        extra = v
 
                     if "T" in v:
                         d = v.find("T")
@@ -328,6 +330,11 @@ def utility_processor():
                         v = v.replace(v[d], map_icon["T"])
                         v = v.replace(tem, '<span style="color: #2DA9F2;">%s&deg;</span>' % tem)
                         extra = v
+
+                    for key in map_icon:
+                        if key in v:
+                            v = v.replace(key, map_icon[key])
+                    extra = v
 
 
                 if prefix == 'H':
