@@ -308,31 +308,21 @@ def utility_processor():
                     for key in map_icon:
                         if key in v:
                             v = v.replace(key, map_icon[key])
-                    extra = v 
-
-                #    for code in ["F", "S", "M"]:
-                #        if code in v:
-                #            a = v.find(code)
-                #            if len(v) >= a+2:
-                #                d = v[a:a + 2]
-                #                v = v.replace(d, map_icon.get(d, "error"))
-                #                extra = v
-
-                #    if "O" in value:
-                #        v = v.replace("O", map_icon.get("O"))
-                #        extra = v
 
                     if "T" in v:
-                        d = v.find("T")
-                        if len(v) > d + 3 and v[d + 3] == ".":
-                            tem = v[d + 1:d + 5]
-                        elif len(v) > d + 2:
-                            tem = v[d + 1:d + 3]
-                        else:
-                            tem = "error"
-                        v = v.replace(v[d], "")
-                        v = v.replace(tem, '<span style="color: #2DA9F2;">%s&deg;</span>' % tem)
-                        extra = v
+                        re.sub(r'T(\d{2}(?:\.\d)?)', r'<span style="color: #2DA9F2;">\1&deg;</span>', v)
+
+                    #    d = v.find("T")
+                    #    if len(v) > d + 3 and v[d + 3] == ".":
+                    #        tem = v[d + 1:d + 5]
+                    #    elif len(v) > d + 2:
+                    #        tem = v[d + 1:d + 3]
+                    #    else:
+                    #        tem = "error"
+                    #    v = v.replace(v[d], "")
+                    #    v = v.replace(tem, '<span style="color: #2DA9F2;">%s&deg;</span>' % tem)
+
+                    extra = v
 
 
 
