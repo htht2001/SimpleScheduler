@@ -310,7 +310,7 @@ def utility_processor():
                             v = v.replace(key, map_icon[key])
 
                     if "T" in v:
-                        re.sub(r'T(\d{2}(?:\.\d)?)', r'<span style="color: #2DA9F2;">\1&deg;</span>', v)
+                        v = re.sub(r'T(\d{2}(?:\.\d)?)', r'<span style="color: #2DA9F2;">\1&deg;</span>', v)
 
                     #    d = v.find("T")
                     #    if len(v) > d + 3 and v[d + 3] == ".":
