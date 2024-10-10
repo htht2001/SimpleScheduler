@@ -766,6 +766,7 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     postdata = '{"entity_id":"%s"}' % eid
                     command = "Setting"
                     extra = "turn_on"
+                    printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
                     call_ha_api(command_url, postdata)
 
                 if "M" in value:
@@ -782,9 +783,8 @@ def call_ha(eid_list, action, passedvalue, friendly_name):
                     postdata = '{"entity_id":"%s","hvac_mode":"%s"}' % (eid, mode_mapping[mode])
                     command = "Setting"
                     extra = "mode to " + mode_mapping[mode]
+                    printlog("SCHED: %s [%s] %s" % (command, friendly_name.get(eid, eid), extra))
                     call_ha_api(command_url, postdata)
-
-
 
                 if "T" in value:
                     d = re.search(r'T(\d+(\.\d+)?)', value)
