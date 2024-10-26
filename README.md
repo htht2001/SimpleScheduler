@@ -3,11 +3,11 @@
 A Home Assistant AddOn to schedule switches, lights and other entities on a weekly base in a visual way without coding.\
 You can keep all the schedules in one place and add/change them in a few clicks, even in your mobile app.
 
-![SimpleScheduler](https://raw.githubusercontent.com/arthurdent75/SimpleScheduler/master/asset/logo.png)
+![SimpleScheduler](https://raw.githubusercontent.com/htht2001/SimpleScheduler/master/asset/logo.png)
 
 ### Installation
 Add the repository and then the addon by clicking on the badges:\
-[<img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg">](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Farthurdent75%2FSimpleScheduler) \
+[<img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg">](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhtht2001%2FSimpleScheduler) \
 [<img src="https://my.home-assistant.io/badges/supervisor_addon.svg">](https://my.home-assistant.io/redirect/supervisor_addon/?addon=00185a40_simplescheduler) \
 If something goes wrong, you can install it manually.\
 You can add the URL of this page in your "add-on store" as a new repository:\
@@ -15,7 +15,7 @@ You can add the URL of this page in your "add-on store" as a new repository:\
 Click *Check for updates* and you will find the add-on "Simple Scheduler" listed.
 
 If you are not using a supervised installation, you can run the addon as a standalone docker.
-Take a look here: [docker_install.MD](https://github.com/arthurdent75/SimpleScheduler/blob/master/asset/docker_install.MD "docker_install.MD")
+Take a look here: [docker_install.MD](https://github.com/htht2001/SimpleScheduler/blob/master/asset/docker_install.MD "docker_install.MD")
 
 ### Type of scheduler
 
