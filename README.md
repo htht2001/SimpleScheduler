@@ -42,14 +42,14 @@ If you need more advanced features:
 - You can set the temperature of a CCT light. Write **16:30>B30|K4700** turn on the light at 30% and set it to 4700°K
 - Full control of climate control
 - Options
-- 16:30>TO turn on
-- 16:30>TMC = set mode cool, option H\D\A\F
-- 16:30>TT22.5 = set temperature, option 22.5\22
-- 16:30>TP3 = set power fan high, option A\1\2\3
-- 16:30>TS0 = swing off, option 0 = off \ 1 = vertical \ 2 = horizontal \ 3 =both
+- **16:30>TO** turn on
+- **16:30>TMC** = set mode cool, option H\D\A\F
+- **16:30>TT22.5** = set temperature, option 22.5\22
+- **16:30>TP3** = set power fan high, option A\1\2\3
+- **16:30>TS0** = swing off, option 0 = off \ 1 = vertical \ 2 = horizontal \ 3 =both
 - You can change everything separately and you can combine together whatever you want,
-- for example 16:30>T_MC_T22.5_P3_S2
-- or 16:30>TO_PA_T22
+- for example **16:30>T_MC_T22.5_P3_S2**
+- or **16:30>TO_PA_T22**
 - You can set the humidity of a (de)humidifier. Write **16:30>H65** to set the humidity to 65% 
 - You can set the position of a cover. Write **16:30>P25** will set the cover at 25%  
 - You can set the fan speed. Write **16:30>F25** will turn on the fan at 25%
